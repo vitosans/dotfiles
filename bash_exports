@@ -1,0 +1,47 @@
+# vim:set ft=sh :
+
+# General
+export TERM="xterm-color"
+if [[ `uname -s` == *CYGWIN* ]]; then
+export TERM="cygwin"
+fi
+export DISPLAY=:0.0
+export EDITOR=vim
+
+# History stuff
+shopt -s histappend
+#shopt -s histverify
+export HISTSIZE=
+export HISTFILESIZE=
+
+# Homebrew temp folder
+export HOMEBREW_TEMP=/usr/local/tmp
+
+# macports
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export MANPATH=/opt/local/share/man:$MANPATH
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+#osx color terminal
+export CLICOLOR=1
+
+# Android stuff
+export ANDROID_ROOT=/Users/vito/src/personal/android/android-ndk
+export PATH="/Users/vito/src/personal/android/tools:/Users/vito/src/personal/android/platform-tools:/usr/lib64/ccache/bin:$PATH:$ANDROID_ROOT/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bini:/opt/local/bin"
+
+# Set the DISPLAY variable handling remote logins 
+who am i | grep '(' > /dev/null
+if [ $? -eq 0 ]; then
+    # remotely logged in 
+    export DISPLAY=`who am i | sed 's/.*(\(.*\)).*/\1/'`
+    # Append ":0" or ":1" if not already there
+    echo $DISPLAY | grep : > /dev/null
+    if [ $? -eq 1 ]; then
+        export DISPLAY=${DISPLAY}:0.0
+    fi
+fi
+#echo DISPLAY=$DISPLAY 
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
+HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+HISTCONTROL=ignoreboth

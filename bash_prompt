@@ -1,0 +1,16 @@
+# vim: set filetype=sh :
+set -o vi
+
+if [ `tty` != "/dev/tty?" ]; then
+    echo -e "\033]2;${HOSTNAME}\007\033]1;\007"
+    COLOR1="\[\033[0;36m\]"
+    COLOR2="\[\033[1;31m\]"
+    COLOR3="\[\033[1;36m\]"
+    COLOR5="\[\033[1;365m\]"
+    COLOR4="\[\033[0m\]"
+    export PS1="---\n\n(\j)$COLOR3($COLOR2\T$COLOR3)$COLOR5<-\u@\h->$COLOR3($COLOR2\W$COLOR3)$COLOR3*>\[\033[1;37m"
+    export PS2="$COLOR2\304$COLOR1\304$COLOR3\304$COLOR4 "
+else
+    export PS1="[\h]:\w\\$ "
+    export PS2=">  "
+fi

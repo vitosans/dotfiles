@@ -1,0 +1,19 @@
+#  Toggle 'fullscreen' or not.
+bind f eval "caption splitonly" "hardstatus ignore"
+bind F eval "caption always"    "hardstatus alwayslastline"
+
+termcapinfo xterm* ti@:te@
+startup_message off
+vbell off
+autodetach on
+altscreen on
+shelltitle "$ |bash"
+defscrollback 10000
+defutf8 on
+nonblock on
+
+hardstatus alwayslastline
+backtick 1 60 60 /home/vito/.screen_ip
+hardstatus string '%{= kw}[ %H: %1`%{= kw} ][%= %{= kw}%?%-Lw%?%{= kW}%n*%f %t%?%?%{= kw}%?%+Lw%?%?%= ][ %{w}%l%{w} ]%{w}[%{w} %m/%d/%y %C %A %{w}]%{w}'
+
+bind 'q' quit

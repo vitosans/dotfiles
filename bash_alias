@@ -1,0 +1,150 @@
+# vim: set filetype=sh :
+
+# Expand aliases; needed to use below alises via Vim :sh / :!
+shopt -s expand_aliases
+
+# Basic, always-on aliases
+
+# Sudo
+alias svim='sudo vim'
+alias stail="sudo tail"
+alias svs="sudo supervisorctl"
+
+# System
+alias term='urxvt -name Terminal -fn "xft:Monospace:pixelsize=14" -fade 20 +sb -depth 32 -fg white -bg rgba:2000/2000/2000/dddd'
+alias rm='rm -i'
+alias src="cd ~/src"
+alias etqw='cd /usr/local/games/etqw'
+alias cp='cp -i'
+alias mv='mv -i'
+alias mkdir='mkdir -p'
+alias h='history'
+alias j='jobs -l'
+alias r='rlogin'
+alias which='type -all'
+alias ..='cd ..'
+alias path='echo -e ${PATH//:/\\n}'
+alias du='du -kh'
+alias df='df -kTh'
+alias la='ls -Al'           # show hidden files
+alias lk='ls -lSr'          # sort by size
+alias lc='ls -lcr'      # sort by change time  
+alias lu='ls -lur'      # sort by access time   
+alias lr='ls -lR'           # recursive ls
+alias lt='ls -ltr'          # sort by date
+alias lm='ls -al |more'     # pipe through 'more'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Package managers
+alias apt-get='sudo apt-get'
+alias apt-cache='sudo apt-cache'
+alias aptitude='sudo aptitude'
+alias apt-file='sudo apt-file'
+alias ash='aptitude show'
+alias ai='aptitude install'
+alias as='aptitude search'
+alias au='aptitude update'
+alias dl='dpkg --list'
+alias port='sudo port'
+alias emerge='sudo emerge'
+
+# Git
+alias gb='git branch'
+alias gba='git branch -a'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gca='git commit -a'
+alias gcam='git commit -a -m'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gl='git log'
+alias glg="git log --graph --pretty=format:'%Cblue%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias gpl='git pull'
+alias gps='git push'
+alias gs='git status'
+alias gsd='git svn dcommit'
+alias gsr='git svn rebase'
+alias gsf='git svn fetch'
+alias gt='git tag'
+alias gr='git rel'
+alias ga='git add'
+alias gco='git checkout'
+alias gsa='git stash apply'
+
+# Make Git autocomplete work with some of the above
+complete -o default -o nospace -F _git_log gl
+complete -o default -o nospace -F _git_diff gd
+complete -o default -o nospace -F _git_tag gt
+complete -o default -o nospace -F _git_branch gb
+complete -o default -o nospace -F _git_add ga
+complete -o default -o nospace -F _git_checkout gco
+complete -o default -o nospace -F _git_commit gc
+
+# Misc
+alias tree='tree -Ca -I ".git|*.pyc|*.swp"'
+alias screen='TERM=screen screen'
+alias rap="sudo /etc/init.d/apache2 reload"
+alias ports="sudo lsof -i -P -sTCP:LISTEN"
+alias ack='ack -a'
+
+# Toys
+alias q4='cd /opt/quake4/'
+alias q3='cd /opt/quake3/'
+alias q2='cd /opt/quake2'
+
+# Spelling typos 
+alias xs='cd' 
+alias vf='cd' 
+alias moer='more' 
+alias moew='more' 
+alias kk='ll' 
+
+# Functions
+convert_hex_to_decimal() 
+{
+    echo $((0x$1)) 
+}
+
+dosum()
+{
+    cksfv $1 | grep $1 | grep -v ";" | awk '{ print $2 }'
+}
+
+do_gwr()
+{
+    cd ~/src/greenwave/lego/trunk/
+    source lego.env
+    cd ~/src/greenwave/lego/trunk/products/
+    if [ -f `pwd`/product.env ]; then
+        source product.env
+    fi
+}
+
+alias gwr=do_gwr
+
+# process / system toys
+function my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,bsdtime,command ; }
+function pp() { my_ps f | awk '!/awk/ && $0~var' var=${1:-".*"} ; }
+
+function ii()   # get current host related info
+{
+    echo -e "\nYou are logged on ${RED}`hostname`"
+    echo -e "\nAdditionnal information:$NC " ; uname -a
+    echo -e "\n${RED}Users logged on:$NC " ; w -h
+    echo -e "\n${RED}Current date :$NC " ; date
+    echo -e "\n${RED}Machine stats :$NC " ; uptime
+    echo -e "\n${RED}Memory stats :$NC " ; free
+    echo
+}
+
+# Change the window title of X terminals 
+case $TERM in
+    xterm*|rxvt*|Eterm)
+    PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
+    ;;
+    screen)
+    PROMPT_COMMAND='echo -ne "\033_${PWD/$HOME/~}\033\\"'
+    ;;
+esac

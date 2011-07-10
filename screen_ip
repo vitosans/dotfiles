@@ -1,0 +1,2 @@
+IP=$(ifconfig en1 | grep Mask | cut -d: -f2 | cut -d " " -f1)
+echo -n "${IP}"
