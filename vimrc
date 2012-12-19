@@ -9,7 +9,6 @@ set autoread " auto read when file is changed from outside
 set ruler
 set showcmd
 set laststatus=2
-set cursorline      
 
 set showmatch
 set matchtime=2

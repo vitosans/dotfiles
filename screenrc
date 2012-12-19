@@ -13,7 +13,6 @@ defutf8 on
 nonblock on
 
 hardstatus alwayslastline
-backtick 1 60 60 /home/vito/.screen_ip
 hardstatus string '%{= kw}[ %H: %1`%{= kw} ][%= %{= kw}%?%-Lw%?%{= kW}%n*%f %t%?%?%{= kw}%?%+Lw%?%?%= ][ %{w}%l%{w} ]%{w}[%{w} %m/%d/%y %C %A %{w}]%{w}'
 
 bind 'q' quit

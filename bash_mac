@@ -4,12 +4,9 @@
 # userland I tend to run into.
 
 # GNU utils
-alias ls='gls --color=auto'
 alias esed='gsed -r'
 alias rm=grm
-eval `dircolors ~/.dir_colors`
-
+alias ls='ls --color=auto'
 # Flags to make things behave more like the GNU versions (i.e. where an actual
 # GNU version is not easily installable)
-alias ps='ps -T'
-PATH=${PATH}:/Users/vito/.gem/ruby/1.8/bin
+#alias ps='ps -T'

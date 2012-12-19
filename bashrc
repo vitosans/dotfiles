@@ -19,6 +19,7 @@ case `uname -s` in
     Linux)
     # Exports 
     . ~/.bash_exports
+    . ~/.bash_linux
     # Tab completion
     if [ -f /etc/bash_completion ]; then
         . /etc/bash_completion
