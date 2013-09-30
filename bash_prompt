@@ -22,7 +22,16 @@ else
     line_color="\[\033[0;34m\]"
 fi
 
-export PS1="${line_color}\n\n┌─(${White}\u@\h${line_color}:${Yellow}\w${line_color})-(${White}\t${line_color})\n|\n└─> ${Color_Off}"
+if [ -f ~/.git-prompt.sh ]; then
+    . ~/.git-prompt.sh
+fi
+
+if [ -f ~/.git-completion.h ]; then
+    . ~/.git-completion.sh
+fi
+
+#export PS1="${line_color}\n\n┌─(${White}\u@\h${line_color}:${Yellow}\w${line_color})-(${White}\t${line_color})\n|\n└─> ${Color_Off}"
+export PS1="${line_color}\n\n┌─(${White}\u@\h${line_color}:${Yellow}\w${line_color})-\$(__git_ps1)-(${White}\t${line_color})\n|\n└─> ${Color_Off}"
 
 unset line_color
 
