@@ -46,7 +46,9 @@ case `uname -s` in
     fi
     # Mac
     . ~/.bash_mac
-    alias serial='screen /dev/tty.usbserial 115200'
+    #alias serial='screen /dev/tty.usbserial 115200'
+    alias serial='screen /dev/tty.NoZAP-PL2303-00001014 115200'
+    alias serial_sun='screen /dev/tty.NoZAP-PL2303-00005014 9600'
     ;;
     *)
     ;;
@@ -57,3 +59,7 @@ esac
 
 # Prompt
 . ~/.bash_prompt
+
+if [ -f ~/.git-completion.bash ]; then
+      . ~/.git-completion.bash
+fi
