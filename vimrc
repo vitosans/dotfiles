@@ -3,7 +3,7 @@ let g:airline_powerline_fonts = 1
 syntax sync fromstart
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " This is the Vundle package, which can be found on GitHub.
